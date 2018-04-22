@@ -1,0 +1,20 @@
+Thu Apr 19 2018
+Initial code was download from 
+https://www.edaplayground.com/x/Pgf
+http://www.nandland.com
+iverilog -o testuart UART_TB.v UART_RX.v
+vvp testuart
+VCD info: dumpfile dump.vcd opened for output.
+Test Passed - Correct Byte Received
+This code was created 
+
+  // Testbench uses a 25 MHz clock
+  // Want to interface to 115200 baud UART
+  // 25000000 / 115200 = 217 Clocks Per Bit.
+  parameter c_CLOCK_PERIOD_NS = 40;
+  Testing at 100 MHz appears okay
+    Using MyHDL to create uart_rx.v with uart_rx.py
+    & uart_tx.v with uart_tx.py
+    pi@pi3-2:~/testing_uart/myhdl $ vvp testuart
+    VCD info: dumpfile dump.vcd opened for output.
+    Test Passed - Correct Byte Received
