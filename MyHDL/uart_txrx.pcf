@@ -1,0 +1,6 @@
+ 
+# pin definitions 
+ 
+set_io i_Clock C8 
+set_io i_RX_Serial T15 
+set_io o_TX_Active T14
