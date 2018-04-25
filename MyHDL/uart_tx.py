@@ -1,7 +1,7 @@
 from myhdl import block, always, Signal, instance, delay, Simulation, intbv
 
 @block
-def uart_tx(i_Clock,i_TX_DV,i_TX_Byte,o_TX_Active,o_TX_Serial,o_TX_Done,CLKS_PER_BIT=217):
+def uart_tx(i_Clock,i_TX_DV,i_TX_Byte,o_TX_Active,o_uart_tx,o_TX_Done,CLKS_PER_BIT=217):
 	r_TX_Done = Signal(bool(0))
 	r_TX_Active = Signal(bool(0))
 	r_Clock_Count = Signal(intbv(0)[8:])
@@ -25,7 +25,7 @@ def uart_tx(i_Clock,i_TX_DV,i_TX_Byte,o_TX_Active,o_TX_Serial,o_TX_Done,CLKS_PER
 		if(r_SM_Main==IDLE):
 			"""Drive Line High for IDLE"""
 		
-			o_TX_Serial.next = 1
+			o_uart_tx.next = 1
 			r_TX_Done.next = 0
 			r_Bit_Index.next = 0
 			r_Clock_Count.next = 0
@@ -37,7 +37,7 @@ def uart_tx(i_Clock,i_TX_DV,i_TX_Byte,o_TX_Active,o_TX_Serial,o_TX_Done,CLKS_PER
 				r_SM_Main.next = IDLE 
 				"""End of IDLE"""
 		elif (r_SM_Main==TX_START_BIT):
-			o_TX_Serial.next = 0
+			o_uart_tx.next = 0
 			if (r_Clock_Count < CLKS_PER_BIT -1):
 				r_Clock_Count.next = r_Clock_Count + 1
 				r_SM_Main.next = TX_START_BIT
@@ -45,7 +45,7 @@ def uart_tx(i_Clock,i_TX_DV,i_TX_Byte,o_TX_Active,o_TX_Serial,o_TX_Done,CLKS_PER
 				r_Clock_Count.next = 0
 				r_SM_Main.next = TX_DATA_BITS
 		elif (r_SM_Main==TX_DATA_BITS):
-			o_TX_Serial.next = r_TX_data[r_Bit_Index]
+			o_uart_tx.next = r_TX_data[r_Bit_Index]
 			if (r_Clock_Count < CLKS_PER_BIT -1):
 				r_Clock_Count.next = r_Clock_Count + 1
 				r_SM_Main.next = TX_DATA_BITS
@@ -59,7 +59,7 @@ def uart_tx(i_Clock,i_TX_DV,i_TX_Byte,o_TX_Active,o_TX_Serial,o_TX_Done,CLKS_PER
 					r_SM_Main.next = TX_STOP_BIT
 					
 		elif (r_SM_Main==TX_STOP_BIT):
-			o_TX_Serial.next = 1
+			o_uart_tx.next = 1
 			if (r_Clock_Count < CLKS_PER_BIT -1):
 				r_Clock_Count.next = r_Clock_Count + 1
 				r_SM_Main.next = TX_STOP_BIT
@@ -90,10 +90,11 @@ def convert_uart(hdl):
 
 	i_TX_DV = Signal(bool(0))
 	o_TX_Done = Signal(bool(0))
-	o_TX_Serial = Signal(bool(0))
+	#o_TX_Serial = Signal(bool(0))
 	o_TX_Active = Signal(bool(0))
+	o_uart_tx = Signal(bool(0))
 	i_Clock  = Signal(bool(0))
 	i_TX_Byte = Signal(intbv(0)[8:])
-	uart_tx_inst = uart_tx(i_Clock,i_TX_DV,i_TX_Byte,o_TX_Active,o_TX_Serial,o_TX_Done,CLKS_PER_BIT=217)
+	uart_tx_inst = uart_tx(i_Clock,i_TX_DV,i_TX_Byte,o_TX_Active,o_uart_tx,o_TX_Done,CLKS_PER_BIT=217)
         uart_tx_inst.convert(hdl=hdl)
 convert_uart(hdl='Verilog')
