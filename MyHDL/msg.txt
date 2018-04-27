@@ -1,0 +1,20 @@
+The test bench (https://github.com/develone/uart_rxtx/blob/master/MyHDL/tb_dut_uart_txrx_comb.v)
+
+that I am trying to get working is for the verilog file.
+(https://github.com/develone/uart_rxtx/blob/master/MyHDL/uart_txrx.v)
+module uart_txrx ( 
+    i_clk, 
+    i_uart_rx, 
+    o_uart_tx 
+); 
+The ports of the module map okay in the test bench with 
+  uart_txrx dut(
+    .i_clk(r_Clock),
+    .i_uart_rx(w_UART_Line),
+    .o_uart_tx(w_TX_Serial)
+  );
+The wires below are needed in the test bench
+wire i_TX_DV; The strobe to start the transfer.
+wire [7:0] i_TX_Byte; The byte to send on the o_uart_tx
+I do not know how to map these wires.
+ 
