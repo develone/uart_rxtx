@@ -4,17 +4,17 @@ module uart_loopback
    output o_uart_tx   // UART TX Data
    
    ); 
-   uart_tx dut_tx(
+   uart_tx uart_tx_inst(
     .i_Clock(i_clk),
-    .i_TX_DV(r_TX_DV),
-    .i_TX_Byte(r_TX_Byte),
+    .i_TX_DV(w_RX_DV),
+    .i_TX_Byte(w_RX_Byte),
     .o_TX_Active(w_TX_Active),
-	.o_uart_tx(w_TX_Serial),
+	.o_uart_tx(o_uart_tx),
     .o_TX_Done()
   );
-  uart_rx dut_rx(
+  uart_rx uart_rx_inst(
     .i_Clock(i_clk),
-    .i_uart_rx(w_UART_Line),
+    .i_uart_rx(i_uart_rx),
     .o_RX_DV(w_RX_DV),
     .o_RX_Byte(w_RX_Byte)
   );

@@ -1,0 +1,6 @@
+ 
+# pin definitions 
+ 
+set_io i_Clk C8 
+set_io i_UART_RX T15 
+set_io o_UART_TX T14
