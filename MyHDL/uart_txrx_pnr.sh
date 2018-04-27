@@ -1,4 +1,4 @@
 #!/bin/bash
-rm -f uart_txrx.txt
-arachne-pnr  -d 8k -p uart_txrx.pcf -o uart_txrx.txt uart_txrx.blif
+rm -f uart_loopback.txt
+arachne-pnr  -d 8k -p uart_loopback.pcf -o uart_loopback.txt uart_loopback.blif
 

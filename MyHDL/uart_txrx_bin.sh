@@ -1,3 +1,3 @@
 #!/bin/bash
-rm -f uart_txrx.bin 
-icepack uart_txrx.txt uart_txrx.bin
+rm -f uart_loopback.bin 
+icepack uart_loopback.txt uart_loopback.bin
