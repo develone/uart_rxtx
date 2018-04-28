@@ -33,12 +33,12 @@ module tb_uart_txrx;
     .i_TX_DV(r_TX_DV),
     .i_TX_Byte(r_TX_Byte),
     .o_TX_Active(w_TX_Active),
-	.o_uart_tx(w_TX_Serial),
+	.o_TX_Serial(w_TX_Serial),
     .o_TX_Done()
 );
   uart_rx dut_rx(
     .i_Clock(r_Clock),
-    .i_uart_rx(w_UART_Line),
+    .i_RX_Serial(w_UART_Line),
     .o_RX_DV(w_RX_DV),
     .o_RX_Byte(w_RX_Byte)
 ); 

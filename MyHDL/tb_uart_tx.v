@@ -4,7 +4,7 @@ reg i_Clock;
 reg i_TX_DV;
 reg [7:0] i_TX_Byte;
 wire o_TX_Active;
-wire o_uart_tx;
+wire o_TX_Serial;
 wire o_TX_Done;
 
 initial begin
@@ -15,7 +15,7 @@ initial begin
     );
     $to_myhdl(
         o_TX_Active,
-        o_uart_tx,
+        o_TX_Serial,
         o_TX_Done
     );
 end
@@ -25,7 +25,7 @@ uart_tx dut(
     i_TX_DV,
     i_TX_Byte,
     o_TX_Active,
-    o_uart_tx,
+    o_TX_Serial,
     o_TX_Done
 );
 

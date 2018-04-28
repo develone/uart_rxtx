@@ -11,7 +11,7 @@ module uart_loopback
    
    uart_rx uart_rx_inst(
     .i_Clock(i_Clk),
-    .i_uart_rx(i_uart_rx),
+    .i_RX_Serial(i_uart_rx),
     .o_RX_DV(w_RX_DV),
     .o_RX_Byte(w_RX_Byte)
   );
@@ -20,7 +20,7 @@ module uart_loopback
     .i_TX_DV(w_RX_DV),
     .i_TX_Byte(w_RX_Byte),
     .o_TX_Active(w_TX_Active),
-	.o_uart_tx(w_TX_Serial),
+	.o_TX_Serial(w_TX_Serial),
     .o_TX_Done()
   );
 
