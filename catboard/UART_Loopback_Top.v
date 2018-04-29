@@ -4,7 +4,7 @@ module UART_Loopback_Top
    output o_UART_TX,   // UART TX Data
  );
   
- 
+  parameter CLKS_PER_BIT    = 868;
   wire w_RX_DV;
   wire [7:0] w_RX_Byte;
   wire w_TX_Active, w_TX_Serial;
@@ -12,13 +12,13 @@ module UART_Loopback_Top
  
    
   // 25,000,000 / 115,200 = 217
-  UART_RX #(.CLKS_PER_BIT(217)) UART_RX_Inst
+  UART_RX #(.CLKS_PER_BIT(CLKS_PER_BIT)) UART_RX_Inst
   (.i_Clock(i_Clk),
    .i_RX_Serial(i_UART_RX),
    .o_RX_DV(w_RX_DV),
    .o_RX_Byte(w_RX_Byte));
     
-  UART_TX #(.CLKS_PER_BIT(217)) UART_TX_Inst
+  UART_TX #(.CLKS_PER_BIT(CLKS_PER_BIT)) UART_TX_Inst
   (.i_Clock(i_Clk),
    .i_TX_DV(w_RX_DV),      // Pass RX to TX module for loopback
    .i_TX_Byte(w_RX_Byte),  // Pass RX to TX module for loopback

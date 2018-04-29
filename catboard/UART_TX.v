@@ -12,7 +12,7 @@
 // (25000000)/(115200) = 217
  
 module UART_TX 
-  #(parameter CLKS_PER_BIT = 217)
+  #(parameter CLKS_PER_BIT = 868)
   (
    input       i_Clock,
    input       i_TX_DV,
@@ -29,7 +29,7 @@ module UART_TX
   parameter CLEANUP      = 3'b100;
   
   reg [2:0] r_SM_Main     = 0;
-  reg [7:0] r_Clock_Count = 0;
+  reg [11:0] r_Clock_Count = 0;
   reg [2:0] r_Bit_Index   = 0;
   reg [7:0] r_TX_Data     = 0;
   reg       r_TX_Done     = 0;
