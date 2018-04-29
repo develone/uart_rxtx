@@ -1,10 +1,10 @@
 
 `include "uart_tx.v" 
-module tb_uart_txrx;
+module tb_dut_uart_txrx;
 
  
   parameter c_CLOCK_PERIOD_NS = 10;
-  parameter c_CLKS_PER_BIT    = 217;
+  //parameter c_CLKS_PER_BIT    = 868;
   //The parameter c_BIT_PERIOD      = 8600;
   //not required
   //parameter c_BIT_PERIOD      = 8600;
@@ -27,6 +27,12 @@ module tb_uart_txrx;
   //w_RX_Byte to see that the r_TX_Done
   reg [7:0] r_loop = 0;
   
+  uart_rx dut_rx(
+    .i_Clock(r_Clock),
+    .i_RX_Serial(w_UART_Line),
+    .o_RX_DV(w_RX_DV),
+    .o_RX_Byte(w_RX_Byte)
+);
   
   uart_tx dut_tx(
     .i_Clock(r_Clock),
@@ -36,12 +42,7 @@ module tb_uart_txrx;
 	.o_TX_Serial(w_TX_Serial),
     .o_TX_Done()
 );
-  uart_rx dut_rx(
-    .i_Clock(r_Clock),
-    .i_RX_Serial(w_UART_Line),
-    .o_RX_DV(w_RX_DV),
-    .o_RX_Byte(w_RX_Byte)
-); 
+ 
   // Keeps the UART Receive input high (default) when
   // UART transmitter is not active
   assign w_UART_Line = w_TX_Active ? w_TX_Serial : 1'b1;
@@ -68,10 +69,10 @@ module tb_uart_txrx;
       //for loop reg that allows
       //clocks pass the detection of 
       //w_RX_Byte to see that the r_TX_Done      
-      for (r_loop = 0; r_loop <= 254 ; r_loop = r_loop + 1) begin
+      //for (r_loop = 0; r_loop <= 1023 ; r_loop = r_loop + 1) begin
       
-			@(posedge r_Clock);
-	  end  
+			//@(posedge r_Clock);
+	  //end  
       $finish();
     end
 

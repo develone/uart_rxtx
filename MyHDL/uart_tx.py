@@ -1,10 +1,10 @@
 from myhdl import block, always, Signal, instance, delay, Simulation, intbv
 
 @block
-def uart_tx(i_Clock,i_TX_DV,i_TX_Byte,o_TX_Active,o_TX_Serial,o_TX_Done,CLKS_PER_BIT=217):
+def uart_tx(i_Clock,i_TX_DV,i_TX_Byte,o_TX_Active,o_TX_Serial,o_TX_Done,CLKS_PER_BIT=None):
 	r_TX_Done = Signal(bool(0))
 	r_TX_Active = Signal(bool(0))
-	r_Clock_Count = Signal(intbv(0)[8:])
+	r_Clock_Count = Signal(intbv(0)[12:])
 	r_TX_data = Signal(intbv(0)[8:])
 	r_Bit_Index = Signal(intbv(0)[3:])
 	
@@ -95,6 +95,6 @@ def convert_uart(hdl):
 	#o_uart_tx = Signal(bool(0))
 	i_Clock  = Signal(bool(0))
 	i_TX_Byte = Signal(intbv(0)[8:])
-	uart_tx_inst = uart_tx(i_Clock,i_TX_DV,i_TX_Byte,o_TX_Active,o_TX_Serial,o_TX_Done,CLKS_PER_BIT=217)
+	uart_tx_inst = uart_tx(i_Clock,i_TX_DV,i_TX_Byte,o_TX_Active,o_TX_Serial,o_TX_Done,CLKS_PER_BIT=868)
         uart_tx_inst.convert(hdl=hdl)
 convert_uart(hdl='Verilog')
