@@ -13,8 +13,8 @@ module UART_TB ();
   // Testbench uses a 25 MHz clock
   // Want to interface to 115200 baud UART
   // 25000000 / 115200 = 217 Clocks Per Bit.
-  parameter c_CLOCK_PERIOD_NS = 40;
-  parameter c_CLKS_PER_BIT    = 217;
+  parameter c_CLOCK_PERIOD_NS = 10;
+  parameter c_CLKS_PER_BIT    = 868;
   parameter c_BIT_PERIOD      = 8600;
   
   reg r_Clock = 0;
@@ -23,6 +23,7 @@ module UART_TB ();
   wire w_TX_Serial;
   reg [7:0] r_TX_Byte = 0;
   wire [7:0] w_RX_Byte;
+  reg [10:0] r_loop = 0;
 
   UART_RX #(.CLKS_PER_BIT(c_CLKS_PER_BIT)) UART_RX_Inst
     (.i_Clock(r_Clock),
@@ -54,16 +55,24 @@ module UART_TB ();
       @(posedge r_Clock);
       @(posedge r_Clock);
       r_TX_DV   <= 1'b1;
-      r_TX_Byte <= 8'h3F;
+      r_TX_Byte <= 8'h3A;
       @(posedge r_Clock);
       r_TX_DV <= 1'b0;
 
       // Check that the correct command was received
       @(posedge w_RX_DV);
-      if (w_RX_Byte == 8'h3F)
+      if (w_RX_Byte == 8'h3A)
         $display("Test Passed - Correct Byte Received");
       else
-        $display("Test Failed - Incorrect Byte Received");
+        //$display("Test Failed - Incorrect Byte Received");
+      //for loop reg that allows
+      //clocks pass the detection of 
+      //w_RX_Byte to see that the r_TX_Done      
+      for (r_loop = 0; r_loop <= 1023; r_loop = r_loop + 1) begin
+      
+          @(posedge r_Clock);
+      end 
+        
       $finish();
     end
   
