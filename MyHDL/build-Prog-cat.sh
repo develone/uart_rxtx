@@ -46,7 +46,7 @@ else
 	else
 		if [ $1 = "2" ]; then
 			echo "programming the catboard"
-			sudo ~/catboard_yosys/config_cat catboard.bin
+			sudo ~/catboard_yosys/config_cat uart_loopback.bin
 		else
 			echo "not a valid options"
 		fi
