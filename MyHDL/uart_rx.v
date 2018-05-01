@@ -12,6 +12,11 @@ module uart_rx (
     o_RX_Byte
 );
 
+  parameter IDLE         = 3'b000;
+  parameter RX_START_BIT = 3'b001;
+  parameter RX_DATA_BITS = 3'b010;
+  parameter RX_STOP_BIT  = 3'b011;
+  parameter CLEANUP      = 3'b100;
 
 input i_Clock;
 input i_RX_Serial;
@@ -20,11 +25,11 @@ reg o_RX_DV;
 output [7:0] o_RX_Byte;
 reg [7:0] o_RX_Byte;
 
-reg r_RX_DV;
-reg [2:0] r_SM_Main;
-reg [11:0] r_Clock_Count;
-reg [2:0] r_Bit_Index;
-reg [7:0] r_RX_Byte;
+reg r_RX_DV = 0;
+reg [2:0] r_SM_Main = 0;
+reg [11:0] r_Clock_Count = 0;
+reg [2:0] r_Bit_Index = 0;
+reg [7:0] r_RX_Byte = 0;
 
 
 

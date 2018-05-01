@@ -14,6 +14,11 @@ module uart_tx (
     o_TX_Done
 );
 
+  parameter IDLE         = 3'b000;
+  parameter TX_START_BIT = 3'b001;
+  parameter TX_DATA_BITS = 3'b010;
+  parameter TX_STOP_BIT  = 3'b011;
+  parameter CLEANUP      = 3'b100;
 
 input i_Clock;
 input i_TX_DV;
@@ -25,12 +30,12 @@ reg o_TX_Serial;
 output o_TX_Done;
 reg o_TX_Done;
 
-reg [11:0] r_Clock_Count;
-reg [2:0] r_Bit_Index;
-reg [7:0] r_TX_data;
-reg r_TX_Active;
-reg [2:0] r_SM_Main;
-reg r_TX_Done;
+reg [11:0] r_Clock_Count = 0;
+reg [2:0] r_Bit_Index = 0;
+reg [7:0] r_TX_data = 0;
+reg r_TX_Active = 0;
+reg [2:0] r_SM_Main = 0;
+reg r_TX_Done = 0;
 
 
 
