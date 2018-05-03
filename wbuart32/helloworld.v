@@ -108,7 +108,7 @@ module	helloworld(i_clk,
 		message[11] = "d";
 		message[12] = "!";
 		message[13] = " ";
-		message[14] = 4'hd;
+		message[14] = "\r";
 		message[15] = "\n";
 	end
 
