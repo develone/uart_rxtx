@@ -1,4 +1,4 @@
-set_io i_clk C8		# 25MHz clock ?
+set_io i_clk C8 	# 25MHz clock ?
 set_io o_ledg[0] A9 #C8
 set_io o_ledg[1] B8 #F7
 set_io o_ledr B7 #K9
