@@ -11,6 +11,6 @@ set_io io_pp_data[2] T7		#icoboard D4 mapped to Catboard used make speechpp to t
 set_io io_pp_data[3] P12	#icoboard A7 mapped to Catboard used make speechpp to test
 set_io io_pp_data[4] P11	#icoboard A6 mapped to Catboard used make speechpp to test
 set_io io_pp_data[5] P9		#icoboard C7 mapped to Catboard used make speechpp to test
-set_io io_pp_data[6] C6
+set_io io_pp_data[6] T9		#icoboard C6 mapped to Catboard used make speechpp to test
 set_io io_pp_data[7] T11	#icoboard D6 mapped to Catboard used make speechpp to test
 set_io o_pp_clkfb    T13	#icoboard D5   # set_io io_pp_data[8] D5 mapped to Catboard used make speechpp to test
