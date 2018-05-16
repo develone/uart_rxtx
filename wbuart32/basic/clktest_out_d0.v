@@ -43,7 +43,7 @@ module	clktest(i_clk, o_ledg, o_ledr,io_pp_data);
 	input			i_clk;
 	output	wire	[1:0]	o_ledg;	// The two green LEDs
 	output	wire		o_ledr;	// The one red LED
-	output   wire    io_pp_data;
+	output	   wire    [7:0] io_pp_data;
 	// Our first task is to generate a strobe that will be true at the
 	// top of any second.  We do this using a 32-bit counter, but step
 	// the counter by 2^32/clock_rate.  Hence, after clock_rate clocks tick
@@ -84,7 +84,16 @@ module	clktest(i_clk, o_ledg, o_ledr,io_pp_data);
 	// set it so that it is true for 1/4 of a second, turning on at the
 	// top of the second we are referencing.
 	assign	o_ledg[0] = (ctr[31:30] == 2'b00);
-	assign	io_pp_data = (ctr[31:30] == 2'b00);
+	
+	assign io_pp_data[0] = (ctr[24:24] == 1'b0);
+	assign io_pp_data[1] = (ctr[25:25] == 1'b0);
+	assign io_pp_data[2] = (ctr[26:26] == 1'b0);
+	assign io_pp_data[3] = (ctr[27:27] == 1'b0);
+	
+	assign io_pp_data[4] = (ctr[28:28] == 1'b0);
+	assign io_pp_data[5] = (ctr[29:29] == 1'b0);
+	assign io_pp_data[6] = (ctr[30:30] == 1'b0);
+	assign io_pp_data[7] = (ctr[31:31] == 1'b0);
 	// Now, we move on to minutes.  We'll count up to 60, and then restart.
 	// Well, in actuality, though, our counter will go from 0..59 and then
 	// go back to zero--so it will never actually hit 60.
