@@ -35,7 +35,7 @@
 ################################################################################
 ##
 ##
-all: blinky pmodtest clktest clktest_d0 dimmer
+all: blinky pmodtest clktest clktest_d0 clktest_out_d0 dimmer
 
 # GNU Make automatic variables (since I can never remember these ...)
 # $@	- name of the target
@@ -49,10 +49,11 @@ all: blinky pmodtest clktest clktest_d0 dimmer
 	icetime -d hx8k -c 66 $<
 	icepack $< $@
 
-.PHONY: blinky pmodtest clktest clktest_d0
+.PHONY: blinky pmodtest clktest clktest_d0 clktest_out_d0
 blinky:     blinky.bin
 clktest:    clktest.bin
 clktest_d0:    clktest_d0.bin
+clktest_out_d0:	clktest_out_d0.bin
 pmodtest:   pmodtest.bin
 dimmer:     dimmer.bin
 
