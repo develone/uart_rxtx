@@ -93,6 +93,7 @@ module	speechpp(i_clk, o_ledg, o_ledr,
 		.BYPASS         (1'b0         ),
 		.RESETB         (1'b1         )
 	);
+	assign	s_clk = clk_66mhz;
 `endif
 
 	wire		pport_stall, pport_ack;
